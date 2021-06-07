@@ -55,6 +55,7 @@ const char * parse_String(cJSON *item,const char *str){
             *ptr2++ = *ptr++;  //字符串深拷贝
         }
     }
+    *(ptr2+1) = NULL;//help GC
     *ptr2 = 0;
     if(*ptr == '\"'){
         ptr++;
@@ -308,6 +309,7 @@ char *print_number(cJSON *item){
     double d = item->valueDouble;
     if (d == 0)
     {
+        str =(char *)cJSON_malloc(5);//help tail
         str = (char *)cJSON_malloc(2);
         if (str) strcpy(str, "0");
     }
